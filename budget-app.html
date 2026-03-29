@@ -362,11 +362,11 @@ body {
 
 /* Synthèse */
 .sum-table { width: 100%; border-collapse: collapse; }
-.sum-table thead th { font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--light); padding: 0 14px 8px; font-weight: 700; border-bottom: 1px solid var(--border); }
+.sum-table thead th { font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--light); padding: 0 8px 8px; font-weight: 700; border-bottom: 1px solid var(--border); white-space: nowrap; }
 .sum-table thead th:not(:first-child) { text-align: right; }
-.sum-table tbody td { padding: 9px 14px; font-size: 13px; border-bottom: 1px solid var(--surface2); }
+.sum-table tbody td { padding: 9px 8px; font-size: 12px; border-bottom: 1px solid var(--surface2); white-space: nowrap; }
 .sum-table tbody td:not(:first-child) { text-align: right; }
-.sum-table .total-row td { font-weight: 700; font-size: 14px; border-top: 2px solid var(--border); border-bottom: none; background: var(--surface2); }
+.sum-table .total-row td { font-weight: 700; font-size: 13px; border-top: 2px solid var(--border); border-bottom: none; background: var(--surface2); }
 
 /* Donut */
 .donut-wrap { display: flex; align-items: center; gap: 24px; margin-top: 8px; }
@@ -379,9 +379,9 @@ body {
 
 /* Capital boxes */
 .capital-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14px; }
-.capital-box { padding: 12px 14px; background: var(--or-light); border-radius: 12px; border: 1px solid #e8d8a0; text-align: center; }
+.capital-box { padding: 10px 8px; background: var(--or-light); border-radius: 12px; border: 1px solid #e8d8a0; text-align: center; overflow: hidden; }
 .capital-label { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--or); font-weight: 700; margin-bottom: 4px; }
-.capital-val { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--or); }
+.capital-val { font-family: 'Playfair Display', serif; font-size: 17px; color: var(--or); word-break: break-word; line-height: 1.2; }
 
 /* Anim */
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
@@ -398,6 +398,17 @@ body {
   .kpi { padding: 16px 18px; }
   .kpi-value { font-size: 22px; }
   .capital-grid { grid-template-columns: repeat(3,1fr); }
+  .capital-val { font-size: 14px; }
+  /* Masquer catégorie — garde Nom + Montant */
+  .exp-table thead th:nth-child(2), .exp-table tbody td:nth-child(2) { display: none; }
+  .exp-table tbody td { padding: 8px 12px; font-size: 13px; }
+  .exp-table .amt { white-space: nowrap; }
+  /* Synthèse compacte */
+  .sum-table tbody td { font-size: 11px; padding: 8px 6px; white-space: nowrap; }
+  .sum-table thead th { font-size: 9px; padding: 0 6px 8px; white-space: nowrap; }
+  /* Virements */
+  .vir-table tbody td { font-size: 12px; padding: 8px 8px; white-space: nowrap; }
+  .vir-table thead th { font-size: 9px; padding: 0 8px 8px; white-space: nowrap; }
 }
 
 /* ── MOBILE (< 720px) ── */
@@ -1314,18 +1325,18 @@ function buildDashboard() {
   // Synthèse table
   html += '<div class="card fade-in">'+
     '<div class="card-label">'+t('synthesis')+'</div>'+
-    '<table class="sum-table"><thead><tr><th>'+t('total')+'</th><th>'+t('monthly')+'</th><th>'+t('annual')+'</th><th>%</th></tr></thead><tbody>'+
+    '<table class="sum-table" style="table-layout:fixed;width:100%"><thead><tr><th style="width:30%">'+t('total')+'</th><th style="width:24%">'+t('monthly')+'</th><th style="width:30%">'+t('annual')+'</th><th style="width:16%">%</th></tr></thead><tbody>'+
     '<tr><td style="color:var(--vert)">'+t('revenues-row')+'</td>'+
-    '<td style="color:var(--vert)" id="syn-rev-m">—</td>'+
-    '<td style="color:var(--vert)" id="syn-rev-a">—</td><td>100 %</td></tr>'+
+    '<td style="color:var(--vert);white-space:nowrap" id="syn-rev-m">—</td>'+
+    '<td style="color:var(--vert);white-space:nowrap" id="syn-rev-a">—</td><td style="white-space:nowrap">100 %</td></tr>'+
     '<tr><td style="color:var(--rouge)">'+t('charges-row')+'</td>'+
-    '<td style="color:var(--rouge)" id="syn-chg-m">—</td>'+
-    '<td style="color:var(--rouge)" id="syn-chg-a">—</td>'+
-    '<td style="color:var(--rouge)">'+pct(totalCharges,revTotal)+'</td></tr>'+
+    '<td style="color:var(--rouge);white-space:nowrap" id="syn-chg-m">—</td>'+
+    '<td style="color:var(--rouge);white-space:nowrap" id="syn-chg-a">—</td>'+
+    '<td style="color:var(--rouge);white-space:nowrap">'+pct(totalCharges,revTotal)+'</td></tr>'+
     '<tr class="total-row"><td style="color:var(--or)">'+t('savings-row')+'</td>'+
-    '<td style="color:var(--or)" id="syn-sav-m">—</td>'+
-    '<td style="color:var(--or)" id="syn-sav-a">—</td>'+
-    '<td style="color:var(--or)">'+pct(totalSavings,revTotal)+'</td></tr>'+
+    '<td style="color:var(--or);white-space:nowrap" id="syn-sav-m">—</td>'+
+    '<td style="color:var(--or);white-space:nowrap" id="syn-sav-a">—</td>'+
+    '<td style="color:var(--or);white-space:nowrap">'+pct(totalSavings,revTotal)+'</td></tr>'+
     '</tbody></table>'+
     '<div class="capital-grid">'+
     ['capital-1','capital-5','capital-10'].map(function(k,i){
