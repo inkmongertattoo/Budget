@@ -275,7 +275,7 @@ body {
 .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
 
 /* KPI grid */
-.kpi-grid { display: grid; gap: 12px; margin-bottom: 14px; }
+.kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin-bottom: 14px; }
 
 /* KPI card */
 .kpi {
@@ -388,24 +388,52 @@ body {
 .fade-in.visible { opacity: 1; transform: translateY(0); }
 
 /* ─── RESPONSIVE ─── */
+
+/* ── TABLETTE iPad (721px - 1024px) ── */
+@media (min-width: 721px) and (max-width: 1100px) {
+  .dash-header { padding: 28px 24px 0; }
+  .dash-body { padding: 20px 24px 48px; }
+  .dash-title { font-size: 34px; }
+  .kpi-grid { grid-template-columns: repeat(3, 1fr) !important; }
+  .kpi { padding: 16px 18px; }
+  .kpi-value { font-size: 22px; }
+  .capital-grid { grid-template-columns: repeat(3,1fr); }
+}
+
+/* ── MOBILE (< 720px) ── */
 @media (max-width: 720px) {
   .dash-header { padding: 24px 16px 0; }
   .dash-body { padding: 16px 16px 48px; }
   .dash-title { font-size: 30px; }
   .grid-2 { grid-template-columns: 1fr; }
-  .kpi-grid { grid-template-columns: 1fr 1fr; }
-  .kpi { padding: 14px 14px; }
-  .kpi-value { font-size: 20px; }
-  .card { padding: 16px; }
+  .card { padding: 16px; border-radius: 14px; }
+  .kpi-grid { grid-template-columns: 1fr 1fr !important; }
+  .kpi-grid .kpi:last-child { grid-column: span 2; }
+  .kpi { padding: 14px 14px; border-radius: 14px; }
+  .kpi-value { font-size: 19px; }
+  .kpi-label { font-size: 9px; margin-bottom: 6px; }
+  .kpi-sub { font-size: 10px; }
+  .rev-card { padding: 12px 14px; border-radius: 14px; }
+  .rev-amount { font-size: 19px; }
+  .rev-avatar { width: 30px; height: 30px; font-size: 12px; }
   .exp-table thead th:nth-child(2), .exp-table tbody td:nth-child(2) { display: none; }
-  .donut-wrap { flex-direction: column; }
+  .exp-table tbody td { padding: 8px 8px; font-size: 12px; }
+  .exp-table thead th { padding: 0 8px 8px; font-size: 9px; }
+  .vir-table tbody td { padding: 8px 8px; font-size: 12px; }
+  .vir-table thead th { font-size: 9px; padding: 0 8px 8px; }
+  .sum-table tbody td { padding: 8px 8px; font-size: 12px; }
+  .sum-table thead th { font-size: 9px; }
+  .donut-wrap { flex-direction: column; gap: 16px; }
+  .legend-val { min-width: 50px; font-size: 11px; }
+  .legend-pct { min-width: 34px; font-size: 10px; }
   .capital-grid { grid-template-columns: 1fr; gap: 6px; }
-  #wizard { padding: 24px 16px 48px; }
-  .step-card { padding: 20px 16px; }
 }
+
 @media (max-width: 400px) {
-  .kpi-grid { grid-template-columns: 1fr 1fr; }
+  .dash-body { padding: 12px 12px 40px; }
   .kpi-value { font-size: 17px; }
+  .dash-title { font-size: 26px; }
+  .exp-table tbody td { font-size: 11px; padding: 5px 6px; }
 }
 </style>
 </head>
@@ -1114,7 +1142,7 @@ function buildDashboard() {
   var html = '';
 
   // ── KPIs
-  html += '<div class="kpi-grid" style="grid-template-columns:repeat('+Math.min(persons.length+2,5)+',1fr)">';
+  html += '<div class="kpi-grid">';
   html += '<div class="kpi fade-in" style="--c:var(--vert)"><div class="kpi-label">'+t('total-revenues')+'</div>'+
     '<div class="kpi-value" id="kv-rev">—</div><div class="kpi-sub">'+fmtI(revTotal*12)+' € '+t('per-year')+'</div></div>';
   html += '<div class="kpi fade-in" style="--c:var(--rouge)"><div class="kpi-label">'+t('total-charges')+'</div>'+
