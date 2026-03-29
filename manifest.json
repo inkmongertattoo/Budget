@@ -1,0 +1,53 @@
+{
+  "name": "SplitBudget",
+  "short_name": "SplitBudget",
+  "description": "Répartition équitable des dépenses pour votre foyer",
+  "start_url": "./budget-app.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#f7f6f2",
+  "theme_color": "#f7f6f2",
+  "lang": "fr",
+  "categories": [
+    "finance",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot.png",
+      "sizes": "390x844",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "SplitBudget — Wizard"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mon budget",
+      "short_name": "Budget",
+      "description": "Accéder directement à mon tableau de bord",
+      "url": "./budget-app.html",
+      "icons": [
+        {
+          "src": "icon-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}
