@@ -323,9 +323,10 @@ body {
 }
 .exp-table tbody tr:last-child td { border-bottom: none; }
 .exp-table tbody tr:hover td { background: var(--surface2); }
-.exp-table .amt { text-align: right; font-weight: 600; white-space: nowrap; }
+.exp-table .amt { text-align: right; font-weight: 600; white-space: nowrap; width: 1%; padding-left: 16px; }
 .exp-table .col-cat { white-space: nowrap; }
 .exp-table .total-row td { font-weight: 700; font-size: 13px; background: var(--surface2); border-top: 1px solid var(--border); }
+.exp-table .total-row .amt { text-align: right; width: 1%; white-space: nowrap; padding-left: 16px; }
 .cat-pill {
   display: inline-block; padding: 2px 8px; border-radius: 20px;
   font-size: 10px; font-weight: 700; background: var(--surface2); color: var(--muted);
@@ -400,11 +401,16 @@ body {
   .kpi { padding: 16px 18px; }
   .kpi-value { font-size: 22px; }
   .capital-val { font-size: 14px; }
-  .exp-table thead th.col-cat, .exp-table tbody td.col-cat { display: none; }
-  .exp-table tbody td { padding: 8px 12px; font-size: 13px; }
-  .exp-table .amt { white-space: nowrap; }
+  /* Tables dépenses : masquer thead entier + colonne catégorie */
+  .exp-table thead { display: none; }
+  .exp-table tbody td.col-cat { display: none; }
+  .exp-table tbody td { padding: 8px 10px; font-size: 13px; }
+  .exp-table .amt { white-space: nowrap; text-align: right; width: 1%; }
+  .exp-table .total-row td { font-size: 13px; }
+  /* Synthèse compacte */
   .sum-table tbody td { font-size: 11px; padding: 8px 6px; white-space: nowrap; }
   .sum-table thead th { font-size: 9px; padding: 0 6px 8px; white-space: nowrap; }
+  /* Virements */
   .vir-table tbody td { font-size: 12px; padding: 8px 8px; white-space: nowrap; }
   .vir-table thead th { font-size: 9px; padding: 0 8px 8px; white-space: nowrap; }
 }
@@ -425,9 +431,11 @@ body {
   .rev-card { padding: 12px 14px; border-radius: 14px; }
   .rev-amount { font-size: 19px; }
   .rev-avatar { width: 30px; height: 30px; font-size: 12px; }
-  .exp-table thead th.col-cat, .exp-table tbody td.col-cat { display: none; }
+  /* Tables : masquer thead + catégorie */
+  .exp-table thead { display: none; }
+  .exp-table tbody td.col-cat { display: none; }
   .exp-table tbody td { padding: 8px 8px; font-size: 12px; }
-  .exp-table thead th { padding: 0 8px 8px; font-size: 9px; }
+  .exp-table .amt { white-space: nowrap; text-align: right; width: 1%; }
   .vir-table tbody td { padding: 8px 8px; font-size: 12px; }
   .vir-table thead th { font-size: 9px; padding: 0 8px 8px; }
   .sum-table tbody td { padding: 8px 8px; font-size: 12px; }
