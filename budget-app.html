@@ -323,10 +323,13 @@ body {
 }
 .exp-table tbody tr:last-child td { border-bottom: none; }
 .exp-table tbody tr:hover td { background: var(--surface2); }
-.exp-table .amt { text-align: right; font-weight: 600; white-space: nowrap; width: 1%; padding-left: 16px; }
-.exp-table .col-cat { white-space: nowrap; }
-.exp-table .total-row td { font-weight: 700; font-size: 13px; background: var(--surface2); border-top: 1px solid var(--border); }
-.exp-table .total-row .amt { text-align: right; width: 1%; white-space: nowrap; padding-left: 16px; }
+/* Colonne nom : prend tout l'espace */
+.exp-table tbody td:first-child { width: auto; }
+/* Colonne montant : largeur fixe, aligné droite, même padding partout */
+.exp-table .amt { text-align: right; font-weight: 600; white-space: nowrap; width: 100px; min-width: 100px; padding: 8px 10px; }
+.exp-table .col-cat { white-space: nowrap; width: 90px; }
+/* Total row — même padding que les lignes normales */
+.exp-table .total-row td { font-weight: 700; font-size: 13px; background: var(--surface2); border-top: 1px solid var(--border); border-bottom: none; padding: 8px 10px; }
 .cat-pill {
   display: inline-block; padding: 2px 8px; border-radius: 20px;
   font-size: 10px; font-weight: 700; background: var(--surface2); color: var(--muted);
@@ -1210,7 +1213,7 @@ function buildDashboard() {
         '<td class="col-cat"><span class="cat-pill">'+e.cat+'</span></td>'+
         '<td class="amt">'+fmtE(+e.amount)+'</td></tr>';
     });
-    html += '<tr class="total-row"><td colspan="2">'+t('total')+'</td><td class="amt">'+fmtE(total)+'</td></tr>';
+    html += '<tr class="total-row"><td>'+t('total')+'</td><td class="col-cat"></td><td class="amt">'+fmtE(total)+'</td></tr>';
     html += '</tbody></table></div>';
   });
   html += '</div>';
@@ -1275,7 +1278,7 @@ function buildDashboard() {
         '<td class="col-cat"><span class="cat-pill">'+e.cat+'</span></td>'+
         '<td class="amt">'+fmtE(+e.amount)+'</td></tr>';
     });
-    html += '<tr class="total-row"><td colspan="2">'+t('total')+'</td><td class="amt">'+fmtE(total)+'</td></tr>';
+    html += '<tr class="total-row"><td>'+t('total')+'</td><td class="col-cat"></td><td class="amt">'+fmtE(total)+'</td></tr>';
     html += '</tbody></table>';
     html += '<div style="margin-top:auto;padding-top:10px">'+
       '<div class="savings-box" style="background:'+p.color.light+'">'+
